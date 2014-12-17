@@ -18,7 +18,7 @@ public class Registro {
 	}
 	
 	public String toString() {
-		return IDMESSAGE + " ; " + SOURCE + " ; " + CONNECTION + " ; " + MESSAGE + " ; " + SUCCESS + " ; " + ACK + " ; " + FUENTE;
+		return IDMESSAGE + " ; " + SOURCE + " ; " + CONNECTION + " ; *'" + MESSAGE.replace(';', '-') + "* ; " + SUCCESS + " ; '" + ACK + "' ; " + FUENTE;
 	}
 	
 }

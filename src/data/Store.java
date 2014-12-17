@@ -7,6 +7,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import config.Config;
+import es.us.tad.Ficheros;
 
 /**
  * Create a store of messages 
@@ -42,8 +43,8 @@ public class Store {
 		try {
 			writer = new PrintWriter(Config.DIR_EXPERIMENTA_SALIDA + filename, "UTF-8");
 			writer.print("Total mensajes:" + HISTORICO.size() + S + S);
+			writer.print("IDMESSAGE ; SOURCE ; CONNECTION ; MESSAGE ; SUCCESS ; ACK ; FUENTE"+S);
 			
-			writer.print("IDMESSAGE;SOURCE;CONNECTION;MESSAGE;SUCCESS;ACK;FUENTE;" + S);
 			Iterator<Registro> it = HISTORICO.iterator();
 			while(it.hasNext()) {
 				Registro r = it.next();
@@ -72,6 +73,32 @@ public class Store {
 		HISTORICO.add(_r);
 		return true;
 	}
+	
+	public Iterator<Registro> iterator() {
+		return HISTORICO.iterator();
+	}
+	
+	public void saveDot() {
+		int contador=1;
+		StringBuffer sb = new StringBuffer("digraph GRAFO {" + S);
+		Iterator<Registro> it = HISTORICO.iterator();
+		while(it.hasNext()){
+			Registro r = it.next();
+			
+			sb.append(r.SOURCE + "_" + r.IDMESSAGE + " -> " + r.CONNECTION + "_" + r.IDMESSAGE + " [label=" + contador++ + "];"+S);
+			
+		}
+		
+		sb.append("}" + S);
+		
+		Ficheros f = new Ficheros(Config.DIR_EXPERIMENTA_SALIDA + "xxx.dot");
+		f.Grabar(sb.toString());
+
+		
+		System.out.println(sb.toString());
+		
+	}
+
 	
 	
 }

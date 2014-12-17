@@ -1,8 +1,10 @@
 package environment;
 
+import java.util.Iterator;
 import java.util.StringTokenizer;
 
 import config.Config;
+import data.Registro;
 import data.Store;
 import environment.brain.BtList;
 import environment.behavs.MessageSystem;
@@ -46,6 +48,7 @@ public class Environment extends Agent {
 		System.out.print("Env: ");
 		System.out.println(MTable.toString());
 		ALMACEN.save(this.getLocalName() + "_log.csv");
+		ALMACEN.saveDot();
 	}
 
 	
@@ -54,6 +57,5 @@ public class Environment extends Agent {
 	}
 	
 
-	
 
 }
